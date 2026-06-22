@@ -1,5 +1,7 @@
 import ctypes
-import tkinter as tk
+
+# Замість стандартного tk імпортуємо TkinterDnD
+from tkinterdnd2 import TkinterDnD
 
 from src.ui import PureFFmpegTrimmer
 
@@ -16,7 +18,10 @@ def set_dpi_awareness():
 
 if __name__ == "__main__":
     set_dpi_awareness()
-    root = tk.Tk()
+
+    # Ініціалізуємо вікно з підтримкою Drag and Drop
+    root = TkinterDnD.Tk()
+
     app = PureFFmpegTrimmer(root)
     if root.winfo_exists():
         root.mainloop()

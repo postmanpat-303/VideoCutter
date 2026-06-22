@@ -23,13 +23,13 @@ class LanguageManager:
                 current_locale = ctypes.windll.kernel32.GetUserDefaultUILanguage()
                 # Код 1058 — це українська в Windows (LCID)
                 if current_locale == 1058:
-                    return 'uk'
+                    return "uk"
 
             if current_locale:
                 current_locale = str(current_locale).lower()
                 # Перевірка за ключовими словами (охоплює 'uk_ua', 'ukrainian', 'ukraine')
-                if any(word in current_locale for word in ['uk', 'ua', 'ukrainian']):
-                    return 'uk'
+                if any(word in current_locale for word in ["uk", "ua", "ukrainian"]):
+                    return "uk"
 
         except Exception as e:
             print(f"Language detection error: {e}")

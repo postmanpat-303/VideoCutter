@@ -159,3 +159,19 @@ def release(c, dry_run=False):
     c.run(f'git tag -a {tag} -m "Release {tag}"')
     c.run("git push origin master --tags")
     print(f"✅ {tag} released and pushed to GitHub!")
+
+
+@task
+def status(c):
+    """Перевіряє поточний стан версії та чи стартував новий реліз."""
+    current_version = get_version()
+    print(f"Поточна версія у файлі: {current_version}")
+
+    if "-" in current_version:
+        # Розбиваємо за дефісом (наприклад, 1.0.11-beta -> ['1.0.11', 'beta'])
+        base_version, suffix = current_version.split('-', 1)
+        print(f"🔄 Зараз у розробці бета-версія нового релізу: {base_version} (суфікс: {suffix})")
+        print("👉 Для завершення релізу виконайте: invoke finish-release")
+    else:
+        print(f"🛑 Зараз встановлено фінальну версію: {current_version} (новий реліз НЕ стартував).")
+        print("👉 Для початку нового релізу виконайте: invoke start-new-release")
