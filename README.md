@@ -20,6 +20,23 @@ You can always download the latest version of the installer here:
 
 ---
 
+## 🦀 Rust Edition — `videocutter-rs`
+
+A blazing-fast Rust rewrite lives in [`rust/`](rust/) — a single static binary with the same lossless stream-copy trimming, **plus multi-cut support**: cut several ranges *out* of a video (or keep only the ones you want) and join everything in one pass, with parallel segment extraction.
+
+```bash
+cd rust && cargo install --path .
+
+vc info  movie.mp4                                          # duration, resolution, codecs, size
+vc trim  movie.mp4 --from 01:30 --to 02:45 -o clip.mp4      # classic single trim (lossless)
+vc cut   movie.mp4 --remove "10-20, 01:00-01:15" -o clean.mp4   # cut ranges OUT
+vc keep  movie.mp4 --ranges "0-30, 60-90" -o highlights.mp4     # keep only these ranges
+```
+
+Add `--reencode` for frame-accurate cuts (lossless mode snaps to keyframes). See [rust/README.md](rust/README.md) for full docs.
+
+---
+
 ## 🛠 Development and Build
 
 ### 1. Requirements
@@ -48,6 +65,7 @@ The project uses **Python Invoke** to automate development tasks. This ensures c
 
 ## 📂 Project Structure
 - `src/` — Application source code (logic and UI).
+- `rust/` — Rust rewrite (CLI, multi-cut support).
 - `tests/` — Unit tests for UI and engine logic.
 - `tasks.py` — Automation scripts (replacing the old release.sh).
 - `version.txt` — Single source of truth for the application version.
