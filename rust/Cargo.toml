@@ -1,6 +1,6 @@
 [package]
 name = "videocutter-rs"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 rust-version = "1.74"
 description = "Blazing fast lossless video trimming and multi-cut tool — Rust rewrite of Pastor Video Trimmer"
